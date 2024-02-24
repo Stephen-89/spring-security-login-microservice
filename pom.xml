@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.demo</groupId>
+    <artifactId>spring-cloud-eureka</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Spring Cloud Eureka Parent</name>
+
+    <modules>
+        <module>spring-eureka</module>
+        <module>spring-gateway</module>
+        <module>spring-common</module>
+        <module>spring-auth</module>
+        <module>microservicetwo</module>
+        <module>microservicethree</module>
+    </modules>
+
+</project>
