@@ -25,26 +25,26 @@ public class UserController {
 
 	@PostMapping("/register")
 	public ResponseEntity<User> save(@Valid @RequestBody UserDto user) {
-		return new ResponseEntity<User>(userService.createUser(user), HttpStatus.CREATED);
+		return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/profile")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<User> readUser() {
-		return new ResponseEntity<User>(userService.readUser(), HttpStatus.OK);
+		return new ResponseEntity<>(userService.readUser(), HttpStatus.OK);
 	}
 
 	@PutMapping("/profile")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<User> updateUser(@RequestBody UserDto user) {
-		return new ResponseEntity<User>(userService.updateUser(user), HttpStatus.OK);
+		return new ResponseEntity<>(userService.updateUser(user), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/deactivate")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<HttpStatus> deleteUser() {
 		userService.deleteUser();
-		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }

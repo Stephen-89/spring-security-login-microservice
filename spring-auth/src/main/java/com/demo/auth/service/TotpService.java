@@ -52,7 +52,7 @@ public class TotpService {
 
 		try {
 			imageData = generator.generate(data);
-			if (!user.getMfaEnabled()) {
+			if (Boolean.FALSE.equals(user.getMfaEnabled())) {
 				user.setMfaEnabled(Boolean.TRUE);
 				user.setTotp(secret);
 				userRepository.save(user);

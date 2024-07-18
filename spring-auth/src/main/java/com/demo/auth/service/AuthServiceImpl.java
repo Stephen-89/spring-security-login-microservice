@@ -3,8 +3,6 @@ package com.demo.auth.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -36,25 +34,25 @@ public class AuthServiceImpl implements AuthService {
 	private JwtTokenUtil jwtTokenUtil;
 
 	@Override
-	public ResponseEntity<User> loginUser(AuthModelDto authModel) throws Exception {
+	public User loginUser(AuthModelDto authModel) throws Exception {
 
 		authenticate(authModel.getUsername(), authModel.getPassword());
 
-		if (!userRolesDetailsService.checkUserNonExpired(authModel.getUsername())) {
+		if (Boolean.FALSE.equals(userRolesDetailsService.checkUserNonExpired(authModel.getUsername()))) {
 
-			if (!userRolesDetailsService.checkUserNonLocked(authModel.getUsername())) {
+			if (Boolean.FALSE.equals(userRolesDetailsService.checkUserNonLocked(authModel.getUsername()))) {
 
 				final UserDetails userDetails = userRolesDetailsService.loadUserByUsername(authModel.getUsername());
 
 				Optional<User> user = userRepository.findByUsername(userDetails.getUsername());
 
-				if (user.get().getMfaEnabled()) {
+				if (Boolean.TRUE.equals(user.get().getMfaEnabled())) {
 					throw new TotpRequiredException("Multi-Factor Authentication Required");
 				} else {
 
 					final String token = jwtTokenUtil.generateToken(userDetails);
 					user.get().setAccessToken(token);
-					return new ResponseEntity<User>(user.get(), HttpStatus.OK);
+					return user.get();
 
 				}
 

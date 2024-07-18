@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User createUser(UserDto user) {
-		if (userRepository.existsByUsername(user.getUsername())) {
+		if (Boolean.TRUE.equals(userRepository.existsByUsername(user.getUsername()))) {
 			throw new UserExistsException("User is already registered with username: " + user.getUsername());
 		}
 		User newUser = new User();
@@ -37,7 +37,8 @@ public class UserServiceImpl implements UserService {
 		newUser.setAccountNonExpired(Boolean.TRUE);
 		newUser.setAccountNonLocked(Boolean.TRUE);
 		newUser.setEnabled(Boolean.TRUE);
-		newUser.setRoles(Arrays.asList(new Role(2l, "ROLE_USER")));
+		newUser.setMfaEnabled(Boolean.FALSE);
+		newUser.setRoles(Arrays.asList(new Role(3l, "ROLE_USER")));
 		return userRepository.save(newUser);
 	}
 
