@@ -15,12 +15,4 @@ spring:
         uri: lb://SPRING-AUTH
         predicates:
         - Path=/spring-auth/*** 
-      - id: serviceTwo
-        uri: lb://MICROSERVICE-TWO
-        predicates:
-        - Path=/service-two/***     
-      - id: serviceThree
-        uri: lb://MICROSERVICE-THREE
-        predicates:
-        - Path=/service-three/***   
 
