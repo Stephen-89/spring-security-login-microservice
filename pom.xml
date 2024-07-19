@@ -15,8 +15,6 @@
         <module>spring-gateway</module>
         <module>spring-common</module>
         <module>spring-auth</module>
-        <module>microservicetwo</module>
-        <module>microservicethree</module>
     </modules>
 
 </project>
